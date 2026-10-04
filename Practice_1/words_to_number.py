@@ -35,6 +35,7 @@ def words_to_number(text):
     words = text.split()
     total = 0
     current = 0
+
     for word in words:
         word = word.strip()
         if word == "hundred":
@@ -43,14 +44,16 @@ def words_to_number(text):
             total += current * 1000
             current = 0
         elif word == "million":
-            total = current * 1_000_000
+            total = current * 1_000_000 + total
             current = 0
         elif word in NumberWord.__members__:
             current += NumberWord[word].value
+
     return total + current
 
-text = input("Введите число словами: ")
 try:
-    print(f"Результат: {words_to_number(text)}")
+    text = input("Введите число словами: ")
+    result = words_to_number(text)
+    print(f"Результат: {result}")
 except Exception as e:
     print(f"Ошибка: {e}")
