@@ -1,11 +1,17 @@
-n = input("Введите в строку числа для возведения в квадрат и дальнейшей склейки: ")
-
 def square_digits(n):
     result = ''
-    for char in n:
+    for char in str(n):
         digit = int(char)
         square = digit ** 2
         result += str(square)
     return result
 
-print("Результат:", square_digits(n))
+try:
+    n = input("Введите число для возведения цифр в квадрат: ")
+    if not n.isdigit():
+        print("Ошибка: введите только цифры.")
+    else:
+        result = square_digits(n)
+        print("Результат:", result)
+except Exception as e:
+    print(f"Ошибка: {e}")
