@@ -8,3 +8,4 @@ user_km = int(input("Введите расстояние в километрах
 user_m = int(input("Введите расстояние в метрах: "))
 result = shortest_distance(user_km, user_m)
 print(f"Наименьшее расстояние в метрах: {result}")
+
