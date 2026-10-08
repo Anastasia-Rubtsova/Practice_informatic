@@ -3,23 +3,17 @@ def factorial(n):
         return None
     if n == 0:
         return 1
-    result = 1
-    for i in range(2, n + 1):
-        result *= i
-    return result
+    res = 1
+    for i in range(1, n + 1):
+        res = res * i
+    return res
 
-def is_strong(number):
-    if number < 0:
+def is_strong(n):
+    if n < 0:
         return False
-    digits = [int(d) for d in str(number)]
-    result = sum(factorial(d) for d in digits)
-    return result == number
-
-try:
-    number = int(input("Введите число, для проверки является ли оно сильным: "))
-    if is_strong(number):
-        print("True")
-    else:
-        print("False")
-except ValueError:
-    print("Ошибка: Введите корректное целое число.")
+    s = str(n)
+    sum_fact = 0
+    for char in s:
+        digit = int(char)
+        sum_fact = sum_fact + factorial(digit)
+    return sum_fact == n
