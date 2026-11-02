@@ -2,7 +2,6 @@ def is_anagram(s1, s2):
     if len(s1) != len(s2):
         return False
     
-    # Массив для подсчета 26 букв латинского алфавита
     counts = [0] * 26
     for char in s1:
         counts[ord(char) - ord('a')] += 1
