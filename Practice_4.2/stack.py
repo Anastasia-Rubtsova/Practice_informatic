@@ -10,13 +10,13 @@ class Stack:
     
     def pop(self):
         if self.is_empty():
-            raise IndexError ("Стек пуст")
+            raise IndexError("Стек пуст")
         return self._storage.pop()
 
     def peek(self):
         if self.is_empty():
-            return None
+            raise IndexError("Стек пуст")
         return self._storage[-1]
     
     def size(self):
-        return len(self._storage) 
+        return len(self._storage)
