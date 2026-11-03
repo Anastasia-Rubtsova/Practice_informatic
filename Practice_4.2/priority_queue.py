@@ -1,41 +1,44 @@
 class PriorityQueue:
     def __init__(self):
-        self._storage = []
+        self._items = []
+        self._keys = []
         self._counter = 0
+    
     def is_empty(self):
-        return len(self._storage) == 0
+        return len(self._items) == 0
     
     def push(self, item, priority):
-        self._storage.append((priority, self._counter, item))
+        self._items.append(item)
+        self._keys.append((priority, self._counter))
         self._counter += 1
 
     def pop(self):
         if self.is_empty():
             raise IndexError("Очередь пуста")
-
+        
+        # Ищем индекс минимального ключа
         best_idx = 0
-        for i in range(1, len(self._storage)):
-            if (self._storage[i][0] > self._storage[best_idx][0] or
-                (self._storage[i][0] == self._storage[best_idx][0] and 
-                 self._storage[i][1] < self._storage[best_idx][1])):
+        for i in range(1, len(self._keys)):
+            if self._keys[i] < self._keys[best_idx]:
                 best_idx = i
-
-        best_item = self._storage[best_idx][2]
-        self._storage.pop(best_idx)
-        return best_item
+        
+        # Удаляем и ключ, и сам элемент
+        self._keys.pop(best_idx)
+        return self._items.pop(best_idx)
 
     def peek(self):
         if self.is_empty():
             raise IndexError("Очередь пуста")
         
         best_idx = 0
-        for i in range(1, len(self._storage)):
-            if (self._storage[i][0] > self._storage[best_idx][0] or
-                (self._storage[i][0] == self._storage[best_idx][0] and 
-                 self._storage[i][1] < self._storage[best_idx][1])):
+        for i in range(1, len(self._keys)):
+            if self._keys[i] < self._keys[best_idx]:
                 best_idx = i
         
-        return self._storage[best_idx][2]
+        return self._items[best_idx]
 
     def size(self):
-        return len(self._storage)
+        return len(self._items)
+
+    def __len__(self):
+        return len(self._items)
